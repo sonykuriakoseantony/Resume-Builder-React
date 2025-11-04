@@ -19,7 +19,6 @@ function Header() {
             edge="start"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}
           >
             <img width={'40px'} src="https://icon-library.com/images/download-resume-icon/download-resume-icon-11.jpg" alt="Logo" />
           </IconButton>

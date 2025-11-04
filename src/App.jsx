@@ -8,6 +8,8 @@ import USerForm from './pages/UserForm'
 import Error from './pages/Error'
 import Header from './components/Header'
 import Footer from './components/Footer'
+import ViewResume from './pages/ViewResume'
+
 
 function App() {
 
@@ -18,6 +20,7 @@ function App() {
         <Route path='/' element={<Home />}/>
         <Route path='/resume' element={<Resume />}/>
         <Route path='/user-form' element={<USerForm />}/>
+        <Route path='/resume/:id/view' element={<ViewResume />}/>
         <Route path='/history' element={<History />}/>
         <Route path='/*' element={<Error />}/>
       </Routes>

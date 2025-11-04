@@ -1,34 +1,35 @@
 import { Box, Button, Divider, Paper, Stack } from '@mui/material'
 import React from 'react'
 
-function Preview() {
+function Preview({resumeData}) {
   return (
     <>
       <Box component="section">
         <Paper elevation={3} className='m-5 p-5 text-center'>
-          <h2>Name of Applicant</h2>
-          <h5>Job Title</h5>
-          <p><span>location</span> | <span>email</span> | <span>phone</span></p>
+          <h2>{resumeData?.fullName}</h2>
+          <h5>{resumeData?.jobTitle}</h5>
+          <p><span>{resumeData?.location}</span> | <span>{resumeData?.email}</span> | <span>{resumeData?.phone}</span></p>
           <div>
-            <a href="" target='_blank' className='me-1 fw-semibold' style={{fontSize : '14px'}}>GITHUB</a><span> | </span>
-            <a href="" target='_blank' className='me-1 fw-semibold' style={{fontSize : '14px'}}>LINKEDIN</a><span> | </span>
-            <a href="" target='_blank' className='me-1 fw-semibold' style={{fontSize : '14px'}}>PORTFOLIO</a>
+            <a href={resumeData?.github} target='_blank' className='me-1 fw-semibold' style={{fontSize : '14px'}}>GITHUB</a><span> | </span>
+            <a href={resumeData?.linkedin} target='_blank' className='me-1 fw-semibold' style={{fontSize : '14px'}}>LINKEDIN</a><span> | </span>
+            <a href={resumeData?.portfolio} target='_blank' className='me-1 fw-semibold' style={{fontSize : '14px'}}>PORTFOLIO</a>
           </div>
           <Divider sx={{fontSize:'25px'}}>Summary</Divider>
-          <p style={{textAlign:'center'}}>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Obcaecati placeat molestias eum dolorem dicta. Ipsam maiores pariatur totam qui porro temporibus soluta magni corporis officia amet, sequi adipisci tempora ratione.</p>
+          <p style={{textAlign:'center'}}>{resumeData?.summary}</p>
           <Divider sx={{fontSize:'25px'}}>Education</Divider>
-          <h5>Course</h5>
-          <p><span>college</span> | <span>university</span> | <span>passout</span></p>
+          <h5>{resumeData?.course}</h5>
+          <p><span>{resumeData?.college}</span> | <span>{resumeData?.university}</span> | <span>{resumeData?.passoutYear}</span></p>
           <Divider sx={{fontSize:'25px'}}>Work Experience</Divider>
-          <h5>jType</h5>
-          <p><span>company</span> | <span>clocation</span> | <span>duration</span></p>
+          <h5>{resumeData?.jobType}</h5>
+          <p><span>{resumeData?.company}</span> | <span>{resumeData?.clocation}</span> | <span>{resumeData?.duration}</span></p>
           <Divider sx={{fontSize:'25px'}}>Skills</Divider>
           <Stack direction={'row'} spacing={2} sx={{ flexWrap: 'wrap' }} justifyContent={'space-evenly'}>
-              <Button id='btnName' variant='contained' className='m-1'>React</Button>
-              <Button id='btnName' variant='contained' className='m-1'>React</Button>
-              <Button id='btnName' variant='contained' className='m-1'>React</Button>
-              <Button id='btnName' variant='contained' className='m-1'>React</Button>
-              <Button id='btnName' variant='contained' className='m-1'>React</Button>
+              {
+                resumeData?.skills?.map((skill, index)=>(
+                  <Button key={index}  variant='contained' className='m-1'>{skill}</Button>
+                ))
+              }
+              
           </Stack>
         </Paper>
       </Box>
