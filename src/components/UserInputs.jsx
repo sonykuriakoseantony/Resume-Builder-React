@@ -7,6 +7,8 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { TextField } from '@mui/material';
 import { FaXmark } from 'react-icons/fa6';
+import { useNavigate } from 'react-router-dom';
+import { addResumeAPI } from '../services/allAPI'
 
 const steps = ['Basic Information', 'Contact Details', 'Educational details', 'Work Experience', 'Skills & Certifications', 'Review & Submit'];
 
@@ -18,7 +20,9 @@ function UserInputs({resumeData,setResumeData}) {
 
   const skillRef = React.useRef();
 
-  console.log(resumeData);
+  const navigate = useNavigate();
+
+  // console.log(resumeData);
   
   const isStepOptional = (step) => {
     return step === 1;
@@ -61,6 +65,32 @@ function UserInputs({resumeData,setResumeData}) {
   const handleReset = () => {
     setActiveStep(0);
   };
+
+  const handleAddResume = async ()=>{
+    const {fullName,jobTitle,location} = resumeData
+    if(!fullName || !jobTitle || !location){
+      alert("Fill the information completely!")
+    }
+    else{
+      console.log("api call to save resume details");
+      try{
+          const result = await addResumeAPI(resumeData)
+          console.log(result);
+
+          if(result.status == 201){
+            alert("Resume added successfully!")
+
+            const {id} = result.data;
+
+            navigate(`/resume/${id}/view`)
+          }
+          
+      }catch(err){
+        console.log(err);
+        
+      }
+    }
+  }
 
   const addSkill = skill =>{
     if(resumeData.skills?.map(data=>data.toLowerCase()).includes(skill.toLowerCase())){
@@ -221,9 +251,13 @@ function UserInputs({resumeData,setResumeData}) {
                 Skip
               </Button>
             )}
-            <Button onClick={handleNext}>
-              {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-            </Button>
+
+            {
+            activeStep === steps.length - 1 ? 
+            <Button onClick={handleAddResume}>Finish</Button> : 
+            <Button onClick={handleNext}>Next</Button>
+            }
+            
           </Box>
         </React.Fragment>
       )}
