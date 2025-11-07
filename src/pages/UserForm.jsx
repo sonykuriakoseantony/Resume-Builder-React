@@ -24,10 +24,6 @@ function UserForm() {
     summary: ''
   })
 
-  const handleResumeDetails = () =>{
-
-  }
-
   return (
     <>
       {/* {Form steps} */}

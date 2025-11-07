@@ -16,7 +16,7 @@ function Footer() {
         <FaFacebook size={25}/>
         <FaSquareInstagram size={25}/>
       </div>
-      <p>Designed & built with <FaHeart color='red'/> using React</p>
+      <p className='mb-0'>Designed & built with <FaHeart color='red'/> using React</p>
     </div>
   )
 }
